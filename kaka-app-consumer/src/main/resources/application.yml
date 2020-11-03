@@ -1,0 +1,23 @@
+server:
+  port: 8085
+  
+spring:  devtools:    restart:      enabled: true  profiles:    active:    - local
+
+---
+spring:
+  profiles:
+  - local
+  kafka:
+    consumer:
+      bootstrap-servers:
+      - localhost:9092,localhost:9093,localhost:9094 
+      key-deserializer:
+        org.apache.kafka.common.serialization.IntegerDeserializer
+      value-deserializer:
+        org.apache.kafka.common.serialization.StringDeserializer
+      group-id: kafka-library-consumer  
+    admin:
+      properties:
+        bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
+    template:
+      default-topic: library-event        
